@@ -1,4 +1,3 @@
-// CustomNavigationDots.dart
 import 'package:flutter/material.dart';
 
 class CustomNavigationDots extends StatelessWidget {
@@ -22,48 +21,77 @@ class CustomNavigationDots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(
+          vertical: 20, horizontal: 20), // Proper padding
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Skip button, always visible except on the last screen
-          !isLastScreen
-              ? TextButton(
-                  onPressed: onSkipPressed, // Skip to login screen
-                  child: const Text(
-                    'SKIP',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                )
-              : const SizedBox(),
+          if (!isLastScreen)
+            TextButton(
+              onPressed: onSkipPressed, // Skip to login screen
+              child: const Text(
+                'SKIP',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16, // Ensure font size matches design
+                  fontWeight: FontWeight.bold, // Make text bold
+                ),
+              ),
+            ),
+          if (isLastScreen)
+            const SizedBox(), // Invisible placeholder on the last screen
+
           // Dots Indicator
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(totalScreens, (index) {
               return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                width: 8,
-                height: 8,
+                margin: const EdgeInsets.symmetric(
+                    horizontal: 5), // Slightly larger space between dots
+                width: currentScreen == index
+                    ? 12
+                    : 8, // Slightly larger active dot
+                height: currentScreen == index
+                    ? 12
+                    : 8, // Matching height for active/inactive dots
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: currentScreen == index
-                      ? Colors.white
-                      : Colors.white.withOpacity(0.3),
+                      ? Colors.yellow // Active dot color is yellow
+                      : Colors.white.withOpacity(0.5), // Inactive dot color
                 ),
               );
             }),
           ),
+
           // Next or Proceed button
           isLastScreen
               ? ElevatedButton(
                   onPressed: onProceedPressed,
-                  child: const Text('PROCEED'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20), // Button padding
+                    backgroundColor: Colors.yellow, // Button background color
+                  ),
+                  child: const Text(
+                    'PROCEED',
+                    style: TextStyle(
+                      color: Colors.black, // Text color on yellow background
+                      fontSize: 16, // Font size for "PROCEED"
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 )
               : TextButton(
                   onPressed: onNextPressed,
                   child: const Text(
                     'NEXT',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16, // Font size for "NEXT"
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
         ],

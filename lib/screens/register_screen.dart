@@ -48,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Register'),
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: Colors.red[900],
       ),
       body: SingleChildScrollView(
@@ -71,6 +71,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.zero, // Removes border radius
+                      ),
                     ),
                     child: Text('EXISTING MEMBER'),
                   ),
@@ -83,6 +87,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.zero, // Removes border radius
+                      ),
                     ),
                     child: Text('NEW MEMBER'),
                   ),
@@ -181,12 +189,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
             // Register button
             Center(
-              child: ElevatedButton(
-                onPressed: _registerNewMember,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red[900], // Register button color
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: 16.0), // Add horizontal margin
+                width: double.infinity, // Makes the button take the full width
+                child: ElevatedButton(
+                  onPressed: _registerNewMember,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red[900], // Register button color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero, // Removes border radius
+                    ),
+                  ),
+                  child: Text(
+                    'REGISTER',
+                    style:
+                        TextStyle(color: Colors.white), // Makes the text white
+                  ),
                 ),
-                child: Text('REGISTER'),
               ),
             ),
           ],

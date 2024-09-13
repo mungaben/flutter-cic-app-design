@@ -21,8 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
     print('Profile ID: $profileId');
     print('Password: $password');
 
-    // Here you would typically add login validation and authentication logic
-
+    // Navigate to ProductScreen after login
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => ProductScreen()),
@@ -34,33 +33,51 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
-        centerTitle: true,
+        centerTitle: false,
+        backgroundColor: Color(0xFF9D162D), // Deep red color
       ),
       body: SingleChildScrollView(
-        // Added SingleChildScrollView here
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(height: 20),
+              // Company logo
               Image.asset(
                 'assets/cic_group_image.png',
                 height: 100,
                 width: 100,
               ),
               SizedBox(height: 20),
-              // Profile ID Input Field
+              // Sign In banner
+              Container(
+                width: double.infinity,
+                color: Color(0xFFFFC107), // Yellow banner background
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Sign In',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              // ID/Passport Number Input Field
               TextField(
-                controller: _profileIdController, // Attach controller
+                controller: _profileIdController,
                 decoration: InputDecoration(
-                  labelText: 'Profile ID',
+                  labelText: 'Id/Passport Number',
                   prefixIcon: Icon(Icons.person),
+                  border: OutlineInputBorder(),
                 ),
               ),
               SizedBox(height: 10),
               // Password Input Field
               TextField(
-                controller: _passwordController, // Attach controller
+                controller: _passwordController,
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -77,62 +94,119 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                     },
                   ),
+                  border: OutlineInputBorder(),
                 ),
               ),
               SizedBox(height: 20),
-              // Login and Register buttons
+              // Register and Login buttons
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton.icon(
-                    onPressed: _login, // Handle login logic and print input
-                    icon: Icon(Icons.login),
-                    label: Text('Login'),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFFFC107), // Yellow color
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.zero, // Removes border radius
+                        ),
+                      ),
+                      onPressed: () {
+                        // Navigate to register screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterScreen()),
+                        );
+                      },
+                      icon: Icon(Icons.person_add),
+                      label: Text('REGISTER'),
+                    ),
                   ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      // Navigate to RegisterScreen
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RegisterScreen()),
-                      );
-                    },
-                    icon: Icon(Icons.app_registration),
-                    label: Text('Register'),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF9D162D), // Deep red color
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.zero, // Removes border radius
+                        ),
+                      ),
+                      onPressed: _login, // Handle login
+                      icon: Icon(Icons.lock),
+                      label: Text(
+                        'LOGIN',
+                        style: TextStyle(
+                            color: Colors.white), // Makes the text white
+                      ),
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              Divider(),
-              // Forgot password button
+              SizedBox(height: 10),
+              // Forgot Password button
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.center,
                 child: TextButton(
                   onPressed: () {
                     // Handle forgot password logic
                   },
-                  child: Text('Forgot Password?'),
+                  child: Text(
+                    'FORGOT PASSWORD',
+                    style: TextStyle(color: Color(0xFF9D162D)), // Deep red text
+                  ),
                 ),
               ),
-              SizedBox(height: 20), // Added extra spacing
-              // Locate Us and Useful Links buttons
+              SizedBox(height: 20),
+              // Useful Links and Locate Us buttons
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextButton.icon(
-                    onPressed: () {
-                      // Handle locate us logic
-                    },
-                    icon: Icon(Icons.location_on),
-                    label: Text('Locate Us'),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.zero, // Removes border radius
+                        ),
+                        side: BorderSide(
+                            color: Color(0xFFFFC107)), // Yellow border
+                      ),
+                      onPressed: () {
+                        // Handle Useful Links logic
+                      },
+                      icon: Icon(Icons.link, color: Color(0xFFFFC107)),
+                      label: Text(
+                        'USEFUL LINKS',
+                        style: TextStyle(color: Color(0xFFFFC107)),
+                      ),
+                    ),
                   ),
-                  TextButton.icon(
-                    onPressed: () {
-                      // Handle useful links logic
-                    },
-                    icon: Icon(Icons.link),
-                    label: Text('Useful Links'),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.zero, // Removes border radius
+                        ),
+                        side: BorderSide(
+                            color: Color(0xFFFFC107)), // Yellow border
+                      ),
+                      onPressed: () {
+                        // Handle Locate Us logic
+                      },
+                      icon: Icon(Icons.location_on, color: Color(0xFFFFC107)),
+                      label: Text(
+                        'LOCATE US',
+                        style: TextStyle(color: Color(0xFFFFC107)),
+                      ),
+                    ),
                   ),
                 ],
               ),

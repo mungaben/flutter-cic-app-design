@@ -1,3 +1,5 @@
+import 'package:cic/screens/existingMemberRegistration_screen.dart';
+import 'package:cic/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class ModalDrawer extends StatelessWidget {
@@ -25,14 +27,20 @@ class ModalDrawer extends StatelessWidget {
           leading: Icon(Icons.home),
           title: Text('My Account'),
           onTap: () {
-            // Add navigation logic here later
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ExistingMemberScreen()),
+            );
           },
         ),
         ListTile(
           leading: Icon(Icons.receipt),
           title: Text('Statement'),
           onTap: () {
-            // Add navigation logic here later
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => OnboardingScreen()),
+            );
           },
         ),
         ListTile(

@@ -1,4 +1,5 @@
 import 'package:cic/screens/productList_screen.dart';
+import 'package:cic/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class ExistingMemberScreen extends StatefulWidget {
@@ -32,8 +33,8 @@ class _ExistingMemberScreenState extends State<ExistingMemberScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Existing Member Registration'),
-        centerTitle: true,
+        title: Text('Resgister'),
+        centerTitle: false,
         backgroundColor: Colors.red[900],
       ),
       body: SingleChildScrollView(
@@ -42,6 +43,7 @@ class _ExistingMemberScreenState extends State<ExistingMemberScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20),
+
             Row(
               children: [
                 Expanded(
@@ -49,6 +51,10 @@ class _ExistingMemberScreenState extends State<ExistingMemberScreen> {
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.zero, // Removes border radius
+                      ),
                     ),
                     child: Text('EXISTING MEMBER'),
                   ),
@@ -57,21 +63,40 @@ class _ExistingMemberScreenState extends State<ExistingMemberScreen> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
+                      //  logic here
                       // Navigate to Existing Member Screen
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ExistingMemberScreen()),
+                            builder: (context) => RegisterScreen()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.zero, // Removes border radius
+                      ),
                     ),
                     child: Text('NEW MEMBER'),
                   ),
                 ),
               ],
             ),
+
+            // New Center widget with small text
+            SizedBox(height: 10), // Small spacing between the button and text
+            Center(
+              child: Text(
+                'existsing member ',
+                style: TextStyle(
+                  fontSize: 10, // Small font size
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center, // Center align the text
+              ),
+            ),
+
             SizedBox(height: 20),
 
             // Member Number
@@ -106,12 +131,24 @@ class _ExistingMemberScreenState extends State<ExistingMemberScreen> {
 
             // Register button
             Center(
-              child: ElevatedButton(
-                onPressed: _registerExistingMember,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red[900], // Signup button color
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: 16.0), // Add horizontal margin
+                width: double.infinity, // Makes the button take the full width
+                child: ElevatedButton(
+                  onPressed: _registerExistingMember,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red[900], // Register button color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero, // Removes border radius
+                    ),
+                  ),
+                  child: Text(
+                    'SIGNUP',
+                    style:
+                        TextStyle(color: Colors.white), // Makes the text white
+                  ),
                 ),
-                child: Text('SIGNUP'),
               ),
             ),
           ],
