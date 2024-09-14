@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'register_screen.dart'; // Import RegisterScreen
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -49,13 +51,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 100,
                 width: 100,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Sign In banner
               Container(
                 width: double.infinity,
                 color: Color(0xFFFFC107), // Yellow banner background
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
+                child: const Text(
                   'Sign In',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -68,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
               // ID/Passport Number Input Field
               TextField(
                 controller: _profileIdController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Id/Passport Number',
                   prefixIcon: Icon(Icons.person),
                   border: OutlineInputBorder(),
@@ -107,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFFFFC107), // Yellow color
                         padding: EdgeInsets.symmetric(vertical: 15),
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.zero, // Removes border radius
                         ),
@@ -130,14 +132,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF9D162D), // Deep red color
                         padding: EdgeInsets.symmetric(vertical: 15),
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.zero, // Removes border radius
                         ),
                       ),
                       onPressed: _login, // Handle login
                       icon: Icon(Icons.lock),
-                      label: Text(
+                      label: const Text(
                         'LOGIN',
                         style: TextStyle(
                             color: Colors.white), // Makes the text white
@@ -154,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     // Handle forgot password logic
                   },
-                  child: Text(
+                  child: const Text(
                     'FORGOT PASSWORD',
                     style: TextStyle(color: Color(0xFF9D162D)), // Deep red text
                   ),
@@ -169,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: OutlinedButton.icon(
                       style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 15),
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.zero, // Removes border radius
                         ),
@@ -179,8 +181,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         // Handle Useful Links logic
                       },
-                      icon: Icon(Icons.link, color: Color(0xFFFFC107)),
-                      label: Text(
+                      icon: const Icon(Icons.link, color: Color(0xFFFFC107)),
+                      label: const Text(
                         'USEFUL LINKS',
                         style: TextStyle(color: Color(0xFFFFC107)),
                       ),
@@ -191,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: OutlinedButton.icon(
                       style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 15),
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.zero, // Removes border radius
                         ),
@@ -202,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         // Handle Locate Us logic
                       },
                       icon: Icon(Icons.location_on, color: Color(0xFFFFC107)),
-                      label: Text(
+                      label: const Text(
                         'LOCATE US',
                         style: TextStyle(color: Color(0xFFFFC107)),
                       ),
