@@ -1,6 +1,8 @@
+// lib/screens/register_screen.dart
 import 'package:cic/screens/existingMemberRegistration_screen.dart';
 import 'package:cic/screens/productList_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:cic/services/registration_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -8,6 +10,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final RegistrationService _registrationService = RegistrationService();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _middleNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -17,30 +20,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _referralController = TextEditingController();
   bool _obscurePassword = true;
 
-  // Function to handle New Member Registration
-  void _registerNewMember() {
-    final String firstName = _firstNameController.text;
-    final String middleName = _middleNameController.text;
-    final String lastName = _lastNameController.text;
-    final String id = _idController.text;
-    final String email = _emailController.text;
-    final String mobile = _mobileController.text;
-    final String referralCode = _referralController.text;
-
-    // Log the registration info
-    print('First Name: $firstName');
-    print('Middle Name: $middleName');
-    print('Last Name: $lastName');
-    print('ID/Passport: $id');
-    print('Email: $email');
-    print('Mobile: $mobile');
-    print('Referral Code: $referralCode');
-
-    // Navigate to Product Screen after registration
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ProductScreen()),
+  // Refactored Function to Handle Registration with API Call
+  Future<void> _registerNewMember() async {
+    final bool isSuccess = await _registrationService.registerUser(
+      firstName: _firstNameController.text,
+      middleName: _middleNameController.text,
+      lastName: _lastNameController.text,
+      id: _idController.text,
+      email: _emailController.text,
+      mobile: _mobileController.text,
+      referralCode: _referralController.text,
     );
+
+    if (isSuccess) {
+      // Navigate to ProductScreen on success
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => ProductScreen()),
+      );
+    } else {
+      // Show error if registration fails
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Registration failed. Please try again.")),
+      );
+    }
   }
 
   @override
@@ -62,18 +65,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigate to Existing Member Screen
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ExistingMemberScreen()),
+                          builder: (context) => ExistingMemberScreen(),
+                        ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.zero, // Removes border radius
+                        borderRadius: BorderRadius.zero,
                       ),
                     ),
                     child: Text('EXISTING MEMBER'),
@@ -83,13 +85,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      // Stay on the current New Member Registration screen
+                      // Stay on the current screen
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.zero, // Removes border radius
+                        borderRadius: BorderRadius.zero,
                       ),
                     ),
                     child: Text('NEW MEMBER'),
@@ -190,21 +191,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             // Register button
             Center(
               child: Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: 16.0), // Add horizontal margin
-                width: double.infinity, // Makes the button take the full width
+                margin: EdgeInsets.symmetric(horizontal: 16.0),
+                width: double.infinity,
                 child: ElevatedButton(
                   onPressed: _registerNewMember,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red[900], // Register button color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero, // Removes border radius
+                    backgroundColor: Colors.red[900],
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'REGISTER',
-                    style:
-                        TextStyle(color: Colors.white), // Makes the text white
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
