@@ -8,13 +8,9 @@ This project is a Flutter-based recreation of the [CIC Insurance Group](https://
 
 ## 📸 App Screenshots
 
-### Authentication Screens
-<img src="https://github.com/user-attachments/assets/39cdf557-e636-41f2-98a6-411fe92537ea" width="300" alt="Login Screen"/>
-
-*User authentication interface with modern design*
-
 ### Home & Dashboard
 <img src="https://github.com/user-attachments/assets/1d75c3d9-0cfd-460b-b6fa-c2d21af41726" width="300" alt="Home Dashboard"/>
+<img src="https://github.com/user-attachments/assets/39cdf557-e636-41f2-98a6-411fe92537ea" width="300" alt="Login Screen"/>
 
 *Main dashboard showing key insurance metrics and quick actions*
 
